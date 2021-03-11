@@ -13,9 +13,7 @@ class Menu extends Component {
             selectedDish: null
         };
     }
-    onDishSelect(dish) {
-        this.setState({ selectedDish: dish}); 
-    }
+    
     renderDish(dish) {
         if (dish != null)
             return(
@@ -38,7 +36,7 @@ class Menu extends Component {
             return (
               <div key={dish.id} className="col-12 col-md-5 m-1"> 
                 <Card key={dish.id}
-                  onClick={() => this.onDishSelect(dish)}>
+                  onClick={() => this.props.onClick(dish.id)}>
                   <CardImg width="100%" src={dish.image} alt={dish.name} />
                   <CardImgOverlay>
                       <CardTitle>{dish.name}</CardTitle>
@@ -57,7 +55,7 @@ class Menu extends Component {
                     {this.renderDish(this.state.selectedDish)}
                   </div>
             </div> */}
-            <Dishdetail dish={this.state.selectedDish}/>
+            
           </div>
         );
     }
