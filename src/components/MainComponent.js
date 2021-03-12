@@ -1,11 +1,15 @@
-import {Navbar , NavbarBrand} from 'reactstrap';
+import {Form, Navbar , NavbarBrand} from 'reactstrap';
 import { Component } from 'react';
 import Menu from './MenuComponent';
 import Dishdetail from './DishdetailComponent'
 import { DISHES } from '../shared/dishes.js';
+import {PROMOTIONS} from '../shared/promotions';
+import {LEADERS} from '../shared/leaders';
+import {COMMENTS} from '../shared/comments';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
+import Contact from './ContactComponent';
 import { Redirect, Route, Switch } from 'react-router';
 
 
@@ -16,7 +20,10 @@ class Main extends Component{
     super(props);
 
     this.state = {
-      dishes :DISHES
+      dishes :DISHES,
+      promotions : PROMOTIONS,
+      leaders:LEADERS,
+      comments:COMMENTS
       
     }
   }
@@ -25,14 +32,18 @@ class Main extends Component{
 
   render(){
     const Homepage = () => {
-      return(<Home />);
+      return(<Home dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+      promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+      leader={this.state.leaders.filter((leader) => leader.featured)[0]}/>);
     }
+   
     return(
       <div>
         <Header />
         <Switch>
           <Route path="/home" component={Homepage}></Route>
           <Route path="/menu" component={() => <Menu dishes={this.state.dishes}/>}></Route>
+          <Route path='/contactus' component={Contact} />
           <Redirect to="/home"/>
         </Switch>
         <Footer />
