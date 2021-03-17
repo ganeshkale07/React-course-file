@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle ,Breadcrumb ,BreadcrumbItem} from 'reactstrap';
 import {List} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 
 
@@ -23,14 +24,17 @@ import { Link } from 'react-router-dom';
                         }).format(new Date(comment.date))}
                     </p>
                     </li>
+                    
                 </List>
+                
                 
             )
         })
         return (
             <div className='col-12 col-md-5 m-1'>
                 <h4> Comment </h4>               
-                    {cmt}               
+                    {cmt}
+                    <CommentForm />               
             </div>
         )
     }
@@ -77,6 +81,7 @@ import { Link } from 'react-router-dom';
                 <div className='row'>
                     {dishItem}
                     {commentItem}
+                    
                 </div>
             </div>
         )
