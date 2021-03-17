@@ -29,8 +29,7 @@ class CommentForm extends Component {
 
     handleSubmit(values){
         this.modalOpener();
-        console.log(JSON.stringify(values));
-        alert(JSON.stringify(values))
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
 
     }
 
@@ -112,7 +111,7 @@ class CommentForm extends Component {
 }
 
 
-     function RenderComments({comments}) {
+     function RenderComments({comments,addComment, dishId}) {
         if (comments == null) {
             return (<div></div>)
         }
@@ -140,7 +139,7 @@ class CommentForm extends Component {
             <div className='col-12 col-md-5 m-1'>
                 <h4> Comment </h4>               
                     {cmt}
-                    <CommentForm  />               
+                    <CommentForm dishId={dishId} addComment={addComment} />               
             </div>
         )
     }
@@ -171,7 +170,9 @@ class CommentForm extends Component {
             return (<div></div>)
         }
         const dishItem = <RenderDish dish={props.dish}/>;
-        const commentItem = <RenderComments comments={props.comments} />;
+        const commentItem = <RenderComments comments={props.comments}
+        addComment={props.addComment}
+        dishId={props.dish.id} />;
         return (
             <div className="container">  
                 <div className="row">
